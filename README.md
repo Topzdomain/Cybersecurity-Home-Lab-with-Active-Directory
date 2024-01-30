@@ -41,6 +41,7 @@ This project is a simulation of a mini corporate network environment for a schoo
 <p align="center">
 <img src="https://i.imgur.com/jjDLBxk.png" height="40%" width="60%"/>
 </p>
+<h5 align="center"> Routing and remote access after configuaration</h5>
 
 -	Next step is to install DHCP server and configure DHCP. On the server management window, I clicked on add roles and features, on the pop-up dialogue box I clicked on next till I got to select destination server, I ensured that my domain server name was selected, clicked on next, on the select server roles, I clicked on DHCP SERVER clicked on add features on the new pop-up dialogue box then next, until the install button became visible, then install. Once the installation is complete, I close the window. Now the DHCP server is installed, the next is to configure the DHCP.
 -	On the server management window, I clicked on tools, scrolled down to and clicked DHCP and a new dhcp dialogue box appears. On the dialogue box, I clicked on the fill down icon on IPv4 to open it up, right-clicked on the IPv4, clicked on New Scope. On the new scope wizard, I clicked on next, set the ip address scope range, start range, end range and subnet mask as contained in the active directory overview screenshot, clicked next, next, on the Lease Duration page, I left the default duration of 8 days, next, next, on the Router (Default Gateway) page, I entered 172.16.0.1 which is the internal network’s IP address(it’ll serve as the gateway address for all devices on the internal network), clicked on Add, next, up to finish.
@@ -54,4 +55,34 @@ This project is a simulation of a mini corporate network environment for a schoo
 -	The next step is to download the repository containing code and name of users to be created from this link https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqbTltWDBNTWlxa1NyRnBVZ2ZEbGo2RHZRSHJ4QXxBQ3Jtc0tuWXd4cUIwTE16MWdJM0VBQ0pIYzVyZXlEUmozTHVKQUJ6TDZtVEtqZUo3STJ0RTBOUHNiblFUYlJob2R5eWtEMldJMEtSb2N0bmZyNUxLcktuemZSUUFrSlFLY0RSWEVoeTlXN2p5bmtHd0tnNnVjRQ&q=https%3A%2F%2Fgithub.com%2Fjoshmadakor1%2FAD_PS%2Farchive%2Frefs%2Fheads%2Fmaster.zip&v=MHsI8hJmggI 
 -	I downloaded and saved the file to desktop folder on my domain server. Extracted the file on the desktop, then launched Power shell ISE as administrator from the windows button. On the power shell window, I clicked on the folder icon and navigated to the desktop where my extracted file is, then double clicked the power shell code file. On the text file containing the names, I added my name to the top of the file and saved it.
 -	On the command line, I input the following command “Set-ExecutionPolicy unrestricted” and clicked on Yes to All. This is to prevent any restrictions during code running. Next, is to navigate into the folder where the name.txt file is located through the commandline using the following code: “cd C:\Users\a_t.olajide\Desktop\AD_PS-master\AD_PS-master” then I used ls to confirm the file is there, after which I run the code for user creation. Next thing is to set-up a machine to with Windows 10 OS which is the client machine.
+
+```commandline
+PS C:\Windows\system32> Set-ExecutionPolicy unrestricted
+
+PS C:\Windows\system32> cd C:\Users\a_t.olajide\Desktop\AD_PS-master\AD_PS-master
+
+PS C:\Users\a_t.olajide\Desktop\AD_PS-master\AD_PS-master> ls
+
+
+    Directory: C:\Users\a_t.olajide\Desktop\AD_PS-master\AD_PS-master
+
+
+Mode                LastWriteTime         Length Name                                                                
+----                -------------         ------ ----                                                                
+-a----        1/25/2024   4:21 AM           1811 .gitignore                                                          
+-a----        1/25/2024   4:21 AM           1025 1_CREATE_USERS.ps1                                                  
+-a----        1/25/2024   4:21 AM           1532 Generate-Names-Create-Users.ps1                                     
+-a----        1/25/2024   4:26 AM          15582 names.txt
+```
+
+<p align="center">
+<img src="https://github.com/Topzdomain/Cybersecurity-Home-Lab-with-Active-Directory/blob/main/creating_1000_users_screenshot.png?raw=true" height="70%" width="60%"/>
+</p>
+
 -	On virtual box, I created a new machine, set the network parameters to Internal network, set base memory and cpu, double click to launch then navigated to the folder where the windows 10 iso image was download and reboot the machine. After the installation, on the commandline, I entered the ipconfig command. This is to check and be sure that the configuration was successful and the client machine can access the internet. After confirming that the IP, DNS and GATEWAY were properly configured, I pinged google and my domain server to confirm connectivity and it was successful.
+
+<p align="center">
+<img src="https://github.com/Topzdomain/Cybersecurity-Home-Lab-with-Active-Directory/blob/main/screenshot_showing_successful_connectin_on_the_client_machine.png?raw=true" height="70%" width="60%"/>
+</p>
+
+- The screenshot above shows the client machine (CLIENT1) successfully connecting to the domain controller, echo response from ping to google shows that address routing is working and CLIENT1 can communicate with external network through the domain controller. Also, if any of the one thousand (1000) username that was created in the active directory is used to log into the CLIENT1 machine. The login is successful, the user can access the internal server and also communicate with external network through the domain controller. This goes to show that the whole set up was very successful. 
